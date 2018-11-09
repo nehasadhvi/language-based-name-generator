@@ -44,11 +44,11 @@ function loadNames(e) {
     // xhr.send();
 
     fetch(url)
-        .then((response) => response.json())
-        .then((names) => {
+        .then(response => response.json())
+        .then(names => {
             let html = '<h2>Generated Names</h2>';
             html += '<ul class="list">';
-            names.forEach((babyName) => {
+            names.forEach(babyName => {
                 html += `
                     <li>
                         ${babyName.name}
@@ -58,6 +58,6 @@ function loadNames(e) {
             html += '</ul>';
             document.getElementById('result').innerHTML = html;
         })
-        .catch((error) => {console.log(error)});
+        .catch(error => {console.log(error)});
 
 }
