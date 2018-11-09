@@ -14,33 +14,50 @@ function loadNames(e) {
         url += `region=${country}&`;
     }
 
-    // Read the country and append to url
+    // Read the gender and append to url
     if(gender !== ''){
         url += `gender=${gender}&`;
     }
 
-    // Read the country and append to url
+    // Read the number of names needed and append to url
     if(amount !== ''){
         url += `amount=${amount}&`;
     }
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onload = function() {
-        if(this.status === 200) {
-            const names = JSON.parse(this.responseText);
+    // const xhr = new XMLHttpRequest();
+    // xhr.open('GET', url, true);
+    // xhr.onload = function() {
+    //     if(this.status === 200) {
+    //         const names = JSON.parse(this.responseText);
 
-            let html = '<h2>Generated Names</h2>'
+    //         let html = '<h2>Generated Names</h2>'
+    //         html += '<ul class="list">';
+    //         names.forEach((babyName) => {
+    //             html += `
+    //                 <li>${babyName.name}</li>
+    //             `;
+    //         });
+    //         html += '</ul>';
+    //         document.getElementById('result').innerHTML = html;
+    //     }
+    // };
+    // xhr.send();
+
+    fetch(url)
+        .then((response) => response.json())
+        .then((names) => {
+            let html = '<h2>Generated Names</h2>';
             html += '<ul class="list">';
             names.forEach((babyName) => {
                 html += `
-                    <li>${babyName.name}</li>
+                    <li>
+                        ${babyName.name}
+                    </li>
                 `;
             });
             html += '</ul>';
             document.getElementById('result').innerHTML = html;
-        }
-    };
-    xhr.send();
+        })
+        .catch((error) => {console.log(error)});
 
 }
